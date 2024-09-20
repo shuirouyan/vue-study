@@ -2,11 +2,11 @@ import axios from 'axios'
 
 const FileManager = {
     // 项目文件post文件夹路径
-    path: process.env.BASE_URL + 'post',
+    path: process.env.BASE_URL + 'post/',
     getAllTopic: function () {
         return [
-            "JavaScript专题",
-            "HTML专题"
+            "HTML专题",
+            "JavaScript专题"
         ]
     },
     getPosts: function (topic) {

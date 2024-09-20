@@ -4,7 +4,7 @@
             <HeaderCom :items="navItem" v-on:selected="changeSelected"></HeaderCom>
         </el-header>
         <el-main>
-            <BodyCom :items="bodyItem"></BodyCom>
+            <BodyCom :items="bodyItem" :topic="navItem[currentTopicIndex].title"></BodyCom>
         </el-main>
         <el-footer>
             <div id="footer">{{ desc }}</div>
@@ -43,7 +43,7 @@ export default {
         bodyItem: function () {
             let curIndex = this.currentTopicIndex + ''
             //console.log('currentTopicIndex:', this.currentTopicIndex, 'typeof:', typeof(curIndex))
-            console.log('currentTopicIndex:', this.currentTopicIndex, 'typeof:', typeof(curIndex))
+            console.log('currentTopicIndex:', this.currentTopicIndex, 'typeof:', typeof (curIndex))
             const param = FM.getPosts(curIndex)
             console.log('param:', param)
             return param.map((item, ind) => {
