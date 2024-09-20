@@ -10,11 +10,14 @@ const FileManager = {
         ]
     },
     getPosts: function (topic) {
+        console.log('topic:', topic, 't')
         switch (topic) {
-            case 0:
+            case '0':
                 return ['文本标签', 'HTML基础元素']
-            case 1:
+            case '1':
                 return ['方法与属性', '语句与数据类型']
+            default:
+                return []
         }
     },
     getPostContent: function (topicName, postName) {

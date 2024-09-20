@@ -5,7 +5,7 @@
         </el-header>
         <el-main style="margin: 0; padding: 0;">
             <el-menu mode="horizontal" background-color="#e8e7e3" text-color="#777777" active-color="#000000"
-                :default-active="'0'">
+                :default-active="'0'" @select="selectItem">
                 <el-menu-item v-for="item in items" :key="item.index" :index="item.index.toString()">
                     <div id="text">{{ item.title }}</div>
                 </el-menu-item>
@@ -24,7 +24,10 @@ export default {
         }
     },
     methods: {
-
+        selectItem(index) {
+            console.log(index)
+            this.$emit('selected', index)
+        }
     }
 }
 </script>

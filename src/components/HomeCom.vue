@@ -1,10 +1,9 @@
 <template>
     <el-container id="container">
         <el-header style="width: 100%;;" height="120px">
-            <HeaderCom :items="navItem"></HeaderCom>
+            <HeaderCom :items="navItem" v-on:selected="changeSelected"></HeaderCom>
         </el-header>
         <el-main>
-
             <BodyCom :items="bodyItem"></BodyCom>
         </el-main>
         <el-footer>
@@ -14,33 +13,52 @@
 </template>
 
 <script>
+
 import BodyCom from './BodyCom.vue'
 import HeaderCom from './HeaderCom.vue'
+import FM from '../tools/FileManger.js'
 export default {
     components: { HeaderCom, BodyCom },
     name: "HomeCom",
     data() {
         return {
-            navItem: [{
-                index: 0,
-                title: 'HTML专题'
-            }, {
-                index: 1,
-                title: 'CSS专题'
-            }],
-            bodyItem: [{
-                index: 0,
-                title: 'HTML简介'
-            }, {
-                index: 1,
-                title: 'HTML编辑器'
-            }],
-            desc: '版权所有，仅供学习使用'
+            navItem: FM.getAllTopic().map((item, ind) => {
+                console.log('navitem:', item, ind)
+                return {
+                    index: ind,
+                    title: item
+                }
+            }),
+            desc: '版权所有，仅供学习使用',
+            currentTopicIndex: 0,
         }
     },
     methods: {
+        changeSelected(index) {
+            console.log('home index:', index)
+            this.currentTopicIndex = index
+        }
+    },
+    computed: {
+        bodyItem: function () {
+            let curIndex = this.currentTopicIndex + ''
+            //console.log('currentTopicIndex:', this.currentTopicIndex, 'typeof:', typeof(curIndex))
+            console.log('currentTopicIndex:', this.currentTopicIndex, 'typeof:', typeof(curIndex))
+            const param = FM.getPosts(curIndex)
+            console.log('param:', param)
+            return param.map((item, ind) => {
+                console.log('ind:', ind, ' item:', item)
+                return {
+                    index: ind,
+                    title: item
+                }
+            })
+        }
+    },
+    mounted: function () {
 
     }
+
 }
 </script>
 
