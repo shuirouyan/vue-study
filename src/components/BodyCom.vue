@@ -42,6 +42,7 @@ export default {
         FileManager.getPostContent(this.topic, this.items[this.currentIndex].title).then(resp => {
             this.content = resp.data
         })
+        console.log('process.env:', process.env)
     },
     watch: {
         currentIndex: function (newVal) {
